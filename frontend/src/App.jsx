@@ -34,13 +34,14 @@ const App = () => {
   return (
     <div className="App">
       <PhotoListItem
-        id={photo.id}
-        imageSource={photo.urls.regular}
-        username={photo.user.username}
-        city={photo.location.city}
-        country={photo.location.country}
-        profile={photo.user.profile}
-        location={photo.location}
+        photo={photo}
+        // id={photo.id}
+        // imageSource={photo.urls.regular}
+        // username={photo.user.username}
+        // city={photo.location.city}
+        // country={photo.location.country}
+        // profile={photo.user.profile}
+        // location={photo.location}
       />
     </div>
   );

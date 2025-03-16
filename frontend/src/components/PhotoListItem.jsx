@@ -1,43 +1,26 @@
 import "../styles/PhotoListItem.scss";
 
-// const sampleDataForPhotoListItem = {
-//   id: 1,
-//   location: {
-//     city: "Montreal",
-//     country: "Canada",
-//   },
-//   urls: {
-//     full: "/Image-1-Full.jpeg",
-//     regular: "/Image-1-Regular.jpeg",
-//   },
-//   user: {
-//     username: "exampleuser",
-//     name: "Joe Example",
-//     profile: "/profile-1.jpg",
-//   },
-// };
-
-const PhotoListItem = ({ username, imageSource, id, location, profile }) => {
+const PhotoListItem = ({ photo }) => {
   return (
     <div className="photo-list__item">
       <img
         className="photo-list__image"
-        src={imageSource}
-        alt={`Photo by ${username}`}
+        src={photo.urls.regular}
+        alt={`Photo by ${photo.user.username}`}
       />
 
       <div className="photo-list__user-details">
         <img
           className="photo-list__user-profile"
-          src={profile}
-          alt={`${username}'s profile`}
+          src={photo.user.profile}
+          alt={`${photo.user.username}'s profile`}
         />
 
         <div className="photo-list__user-info">
-          <span className="photo-list__user-name">{username}</span>
-          {location && (
+          <span className="photo-list__user-name">{photo.user.username}</span>
+          {photo.location && (
             <div className="photo-list__user-location">
-              {location.city}, {location.country}
+              {photo.location.city}, {photo.location.country}
             </div>
           )}
         </div>
