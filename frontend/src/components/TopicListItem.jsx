@@ -8,7 +8,9 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = ({ id, title, slug, onClick }) => {
   const handleClick = () => {
-    onClick(id);
+    if (typeof onClick === "function") {
+      onClick(id);
+    }
   };
 
   return (
