@@ -1,35 +1,9 @@
 import React from "react";
-import PhotoListItem from "./components/PhotoListItem";
+import PhotoList from "./components/PhotoList";
+// import PhotoListItem from "./components/PhotoListItem";
 import "./App.scss";
 
-// const sampleDataForPhotoListItem = {
-//   id: "1",
-//   username: "exampleUser ",
-//   imageSource: "/Image-1-Regular.jpeg",
-//   location: {
-//     city: "Montreal",
-//     country: "Canada",
-//   },
-//   profile: "/profile-1.jpg",
-// };
-
 const App = () => {
-  // const photo = {
-  //   id: 1,
-  //   urls: {
-  //     regular: "/Image-1-Regular.jpeg",
-  //   },
-  //   user: {
-  //     username: "exampleuser1",
-  //     name: "Joe Example",
-  //     profile: "/profile-1.jpg",
-  //   },
-  //   location: {
-  //     city: "Montreal",
-  //     country: "Canada",
-  //   },
-  // };
-
   const photos = [
     {
       id: 1,
@@ -87,7 +61,8 @@ const App = () => {
     <div className="App">
       <div className="photo-list">
         {photos.map((photo) => (
-          <PhotoListItem key={photo.id} photo={photo} />
+          // <PhotoListItem key={photo.id} photo={photo} />
+          <PhotoList photos={photos} />
         ))}
       </div>
     </div>
