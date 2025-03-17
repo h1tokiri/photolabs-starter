@@ -4,8 +4,8 @@ import { useState } from "react";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-const PhotoFavButton = ({ photoID }) => {
-  const [selected, setSelected] = useState(false);
+const PhotoFavButton = ({ photoId, isFavourite = false }) => {
+  const [selected, setSelected] = useState(isFavourite);
 
   const handleFavClick = (event) => {
     event.stopPropagation();
