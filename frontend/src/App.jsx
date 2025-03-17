@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import PhotoList from "./components/PhotoList";
-import TopNavigationBar from "./components/TopNavigationBar";
+// import PhotoList from "./components/PhotoList";
+// import TopNavigationBar from "./components/TopNavigationBar";
+import HomeRoute from "./routes/HomeRoute";
 import "./App.scss";
 
 const App = () => {
@@ -65,13 +66,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <TopNavigationBar
+      {/* <TopNavigationBar
         onSelectTopic={handleSelectTopic}
         isFavPhotoExist={favourites.length > 0}
       />
       <div className="photo-list">
         <PhotoList photos={photos} />
-      </div>
+      </div> */}
+      <HomeRoute
+        photos={photos}
+        favourites={favourites}
+        handleSelectTopic={handleSelectTopic}
+      />
     </div>
   );
 };
