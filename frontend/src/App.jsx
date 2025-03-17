@@ -60,10 +60,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="photo-list">
-        {photos.map((photo) => (
-          // <PhotoListItem key={photo.id} photo={photo} />
-          <PhotoList photos={photos} />
-        ))}
+        <PhotoList photos={photos} />
       </div>
     </div>
   );
