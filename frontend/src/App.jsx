@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PhotoList from "./components/PhotoList";
-// import PhotoListItem from "./components/PhotoListItem";
+import TopNavigationBar from "./components/TopNavigationBar";
 import "./App.scss";
 
 const App = () => {
+  const [favourites, setFavourites] = useState([]);
+
+  const handleSelectTopic = (topicId) => {
+    console.log(`Selected topic: ${topicId}`);
+  };
+
   const photos = [
     {
       id: 1,
@@ -59,6 +65,10 @@ const App = () => {
 
   return (
     <div className="App">
+      <TopNavigationBar
+        onSelectTopic={handleSelectTopic}
+        isFavPhotoExist={favourites.length > 0}
+      />
       <div className="photo-list">
         <PhotoList photos={photos} />
       </div>
