@@ -12,6 +12,18 @@ const App = () => {
     console.log(`Selected topic: ${topicId}`);
   };
 
+  const toggleFavourite = (photoId) => {
+    setFavourites((prev) => {
+      const isFavourited = prev.includes(photoId);
+
+      if (isFavourited) {
+        return prev.filter((id) => id !== photoId);
+      } else {
+        return [...prev, photoId];
+      }
+    });
+  };
+
   return (
     <div className="App">
       <HomeRoute
@@ -19,6 +31,7 @@ const App = () => {
         topics={topics}
         favourites={favourites}
         handleSelectTopic={handleSelectTopic}
+        toggleFavourite={toggleFavourite}
       />
     </div>
   );

@@ -1,9 +1,15 @@
-import "../styles/HomeRoute.scss";
 import React from "react";
 import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
+import "../styles/HomeRoute.scss";
 
-const HomeRoute = ({ photos, topics, favourites, handleSelectTopic }) => {
+const HomeRoute = ({
+  photos,
+  topics,
+  favourites,
+  handleSelectTopic,
+  toggleFavourite,
+}) => {
   return (
     <div className="home-route">
       <TopNavigationBar
@@ -12,7 +18,11 @@ const HomeRoute = ({ photos, topics, favourites, handleSelectTopic }) => {
         isFavPhotoExist={favourites.length > 0}
       />
       <div className="home-route__photo-section">
-        <PhotoList photos={photos} />
+        <PhotoList
+          photos={photos}
+          favourites={favourites}
+          toggleFavourite={toggleFavourite}
+        />
       </div>
     </div>
   );

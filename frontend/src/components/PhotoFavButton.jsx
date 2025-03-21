@@ -1,21 +1,18 @@
-// import FavIcon from './FavIcon';
-
-import { useState } from "react";
+import React from "react";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-const PhotoFavButton = ({ photoId, isFavourite = false }) => {
-  const [selected, setSelected] = useState(isFavourite);
-
-  const handleFavClick = (event) => {
+const PhotoFavButton = ({ photoId, isFavourite = false, toggleFavourite }) => {
+  const handleClick = (event) => {
     event.stopPropagation();
-    setSelected((prev) => !prev);
+
+    toggleFavourite(photoId);
   };
 
   return (
-    <div className="photo-list__fav-icon" onClick={handleFavClick}>
+    <div className="photo-list__fav-icon" onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={selected} />
+        <FavIcon selected={isFavourite} />
       </div>
     </div>
   );
