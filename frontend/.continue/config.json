@@ -1,0 +1,10 @@
+{
+  "model": {
+    "provider": "ollama",
+    "model": "gemma:7b"
+  },
+  // "context": {
+  //   "maxFiles": 15,
+  //   "maxTokens": 4000
+  // }
+}
