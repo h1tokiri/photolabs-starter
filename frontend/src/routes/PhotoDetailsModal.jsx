@@ -127,3 +127,5 @@ const PhotoDetailsModal = ({
 };
 
 export default PhotoDetailsModal;
+
+/* In your getSimilarPhotos function, you're currently importing and using the entire photos array to find similar photos. This might not be efficient if the photos array is large. If possible, consider fetching only the necessary photos based on the topic of the selected photo. This would reduce the amount of data being processed and potentially improve performance. */
