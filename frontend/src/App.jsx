@@ -45,7 +45,12 @@ const App = () => {
         openModal={openModal}
       />
       {selectedPhoto && (
-        <PhotoDetailsModal photo={selectedPhoto} onClose={closeModal} />
+        <PhotoDetailsModal
+          photo={selectedPhoto}
+          onClose={closeModal}
+          favourites={favourites}
+          toggleFavourite={toggleFavourite}
+        />
       )}
     </div>
   );

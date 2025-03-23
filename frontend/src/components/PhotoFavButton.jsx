@@ -4,8 +4,10 @@ import "../styles/PhotoFavButton.scss";
 
 const PhotoFavButton = ({ photoId, isFavourite = false, toggleFavourite }) => {
   const handleClick = (event) => {
+    // Stop the click from propagating to parent elements
     event.stopPropagation();
 
+    // Toggle the favorite status for this photo
     toggleFavourite(photoId);
   };
 
