@@ -1,55 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import HomeRoute from "./routes/HomeRoute";
 import "./App.scss";
-
-import photos from "./mocks/photos";
-import topics from "./mocks/topics";
 import PhotoDetailsModal from "./routes/PhotoDetailsModal";
+import useApplicationData from "./hooks/useApplicationData";
 
 const App = () => {
-  const [favourites, setFavourites] = useState([]);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-  const handleSelectTopic = (topicId) => {
-    console.log(`Selected topic: ${topicId}`);
-  };
-
-  const toggleFavourite = (photoId) => {
-    setFavourites((prev) => {
-      const isFavourited = prev.includes(photoId);
-
-      if (isFavourited) {
-        return prev.filter((id) => id !== photoId);
-      } else {
-        return [...prev, photoId];
-      }
-    });
-  };
-
-  const openModal = (photo) => {
-    setSelectedPhoto(photo);
-  };
-
-  const closeModal = () => {
-    setSelectedPhoto(null);
-  };
+  const {
+    state,
+    updateToFavPhotoIds,
+    setPhotoSelected,
+    onClosePhotoDetailsModal,
+    handleSelectTopic,
+  } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
-        topics={topics}
-        favourites={favourites}
+        photos={state.photos}
+        topics={state.topics}
+        favourites={state.favouritePhotoIds}
         handleSelectTopic={handleSelectTopic}
-        toggleFavourite={toggleFavourite}
-        openModal={openModal}
+        toggleFavourite={updateToFavPhotoIds}
+        openModal={setPhotoSelected}
       />
-      {selectedPhoto && (
+      {state.selectedPhoto && (
         <PhotoDetailsModal
-          photo={selectedPhoto}
-          onClose={closeModal}
-          favourites={favourites}
-          toggleFavourite={toggleFavourite}
+          photo={state.selectedPhoto}
+          onClose={onClosePhotoDetailsModal}
+          favourites={state.favouritePhotoIds}
+          toggleFavourite={updateToFavPhotoIds}
         />
       )}
     </div>
