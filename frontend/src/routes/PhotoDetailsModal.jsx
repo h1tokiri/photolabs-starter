@@ -10,16 +10,39 @@ const PhotoDetailsModal = ({
   favourites = [],
   toggleFavourite,
 }) => {
+  // original
   // Get similar photos based on the current photo's topic
+  // const getSimilarPhotos = (selectedPhoto) => {
+  //   try {
+  //     const allPhotos = require("../mocks/photos").default;
+  //     const photoTopic = selectedPhoto.topic;
+  //     if (!photoTopic) return [];
+
+  //     return allPhotos
+  //       .filter((p) => p.id !== selectedPhoto.id && p.topic === photoTopic)
+  //       .slice(0, 4);
+  //   } catch (error) {
+  //     console.error("Error finding similar photos:", error);
+  //     return [];
+  //   }
+  // };
+
+  //works to get similar photos but messed up all my other UI
   const getSimilarPhotos = (selectedPhoto) => {
     try {
-      const allPhotos = require("../mocks/photos").default;
-      const photoTopic = selectedPhoto.topic;
-      if (!photoTopic) return [];
+      // Check if the photo has similar_photos
+      if (selectedPhoto.similar_photos) {
+        // Convert object to array if it's not already an array
+        if (Array.isArray(selectedPhoto.similar_photos)) {
+          return selectedPhoto.similar_photos;
+        } else {
+          // Convert object to array
+          return Object.values(selectedPhoto.similar_photos);
+        }
+      }
 
-      return allPhotos
-        .filter((p) => p.id !== selectedPhoto.id && p.topic === photoTopic)
-        .slice(0, 4);
+      console.log("No similar photos found in photo object");
+      return [];
     } catch (error) {
       console.error("Error finding similar photos:", error);
       return [];

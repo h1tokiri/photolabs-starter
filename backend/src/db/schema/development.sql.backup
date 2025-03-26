@@ -1,0 +1,20 @@
+INSERT INTO "USER_ACCOUNT" ("ID", "FULLNAME", "USERNAME", "PROFILE_URL") 
+VALUES 
+  (1, 'Olivia Johnson', 'oliviajohnson', 'https://example.com/profile1.jpg'),
+  (2, 'Samuel Davis', 'samueldavis', 'https://example.com/profile2.jpg'),
+  (3, 'Emma Wilson', 'emmawilson', 'https://example.com/profile3.jpg');
+
+INSERT INTO "TOPIC" ("ID", "TITLE", "SLUG")
+VALUES 
+  (1, 'Nature', 'nature'),
+  (2, 'Architecture', 'architecture'),
+  (3, 'People', 'people'),
+  (4, 'Travel', 'travel');
+
+INSERT INTO "PHOTO" ("ID", "FULL_URL", "REGULAR_URL", "CITY", "COUNTRY", "USER_ID", "TOPIC_ID")
+VALUES
+  (1, 'https://example.com/photos/nature1_full.jpg', 'https://example.com/photos/nature1_regular.jpg', 'Vancouver', 'Canada', 1, 1),
+  (2, 'https://example.com/photos/architecture1_full.jpg', 'https://example.com/photos/architecture1_regular.jpg', 'Paris', 'France', 1, 2),
+  (3, 'https://example.com/photos/people1_full.jpg', 'https://example.com/photos/people1_regular.jpg', 'Tokyo', 'Japan', 2, 3),
+  (4, 'https://example.com/photos/travel1_full.jpg', 'https://example.com/photos/travel1_regular.jpg', 'Rome', 'Italy', 3, 4),
+  (5, 'https://example.com/photos/nature2_full.jpg', 'https://example.com/photos/nature2_regular.jpg', 'Banff', 'Canada', 2, 1);

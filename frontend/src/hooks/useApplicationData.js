@@ -1,6 +1,4 @@
-import { useReducer } from "react";
-import photos from "../mocks/photos";
-import topics from "../mocks/topics";
+import { useReducer, useEffect } from "react";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -13,8 +11,8 @@ export const ACTIONS = {
 };
 
 const initialState = {
-  photos: photos,
-  topics: topics,
+  photos: [],
+  topics: [],
   favouritePhotoIds: [],
   selectedPhoto: null
 };
@@ -51,12 +49,6 @@ function reducer(state, action) {
         selectedPhoto: action.payload.photo
       };
 
-    case ACTIONS.DISPLAY_PHOTO_DETAILS:
-      return {
-        ...state,
-        selectedPhoto: action.payload.photo
-      };
-
     case ACTIONS.CLOSE_PHOTO_DETAILS:
       return {
         ...state,
@@ -64,16 +56,62 @@ function reducer(state, action) {
       };
 
     default:
-      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`
-
-      );
+      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
   }
 }
 
-
 const useApplicationData = () => {
-
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    console.log("Fetching photos...");
+    fetch("http://localhost:8001/api/photos")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Photos loaded:", data.length);
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: { photos: data }
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching photos:", error);
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: { photos: [] }
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("Fetching topics...");
+    fetch("http://localhost:8001/api/topics")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Topics loaded:", data.length);
+        dispatch({
+          type: ACTIONS.SET_TOPIC_DATA,
+          payload: { topics: data }
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching topics:", error);
+        dispatch({
+          type: ACTIONS.SET_TOPIC_DATA,
+          payload: { topics: [] }
+        });
+      });
+  }, []);
 
   const updateToFavPhotoIds = (photoId) => {
     const isFavourited = state.favouritePhotoIds.includes(photoId);
@@ -106,8 +144,32 @@ const useApplicationData = () => {
 
   const handleSelectTopic = (topicId) => {
     console.log(`Selected topic: ${topicId}`);
+    // If you want to implement topic filtering:
+    if (topicId) {
+      fetch(`/api/topics/${topicId}/photos`)
+        .then(response => response.json())
+        .then(data => {
+          dispatch({
+            type: ACTIONS.SET_PHOTO_DATA,
+            payload: { photos: data }
+          });
+        })
+        .catch(error => console.error("Error fetching topic photos:", error));
+    } else {
+      // If no topic selected, fetch all photos again
+      fetch("/api/photos")
+        .then(response => response.json())
+        .then(data => {
+          dispatch({
+            type: ACTIONS.SET_PHOTO_DATA,
+            payload: { photos: data }
+          });
+        })
+        .catch(error => console.error("Error fetching all photos:", error));
+    }
   };
 
+  // Add this return statement if it's missing
   return {
     state,
     updateToFavPhotoIds,
