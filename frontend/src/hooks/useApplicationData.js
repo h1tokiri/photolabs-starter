@@ -144,9 +144,7 @@ const useApplicationData = () => {
 
   const handleSelectTopic = (topicId) => {
     console.log(`Selected topic: ${topicId}`);
-    // If you want to implement topic filtering:
     if (topicId) {
-      // fetch(`/api/topics/${topicId}/photos`)
       fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
         .then(response => response.json())
         .then(data => {
@@ -157,7 +155,6 @@ const useApplicationData = () => {
         })
         .catch(error => console.error("Error fetching topic photos:", error));
     } else {
-      // If no topic selected, fetch all photos again
       fetch("/api/photos")
         .then(response => response.json())
         .then(data => {
@@ -170,7 +167,6 @@ const useApplicationData = () => {
     }
   };
 
-  // Add this return statement if it's missing
   return {
     state,
     updateToFavPhotoIds,

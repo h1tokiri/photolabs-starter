@@ -10,33 +10,12 @@ const PhotoDetailsModal = ({
   favourites = [],
   toggleFavourite,
 }) => {
-  // original
-  // Get similar photos based on the current photo's topic
-  // const getSimilarPhotos = (selectedPhoto) => {
-  //   try {
-  //     const allPhotos = require("../mocks/photos").default;
-  //     const photoTopic = selectedPhoto.topic;
-  //     if (!photoTopic) return [];
-
-  //     return allPhotos
-  //       .filter((p) => p.id !== selectedPhoto.id && p.topic === photoTopic)
-  //       .slice(0, 4);
-  //   } catch (error) {
-  //     console.error("Error finding similar photos:", error);
-  //     return [];
-  //   }
-  // };
-
-  //works to get similar photos but messed up all my other UI
   const getSimilarPhotos = (selectedPhoto) => {
     try {
-      // Check if the photo has similar_photos
       if (selectedPhoto.similar_photos) {
-        // Convert object to array if it's not already an array
         if (Array.isArray(selectedPhoto.similar_photos)) {
           return selectedPhoto.similar_photos;
         } else {
-          // Convert object to array
           return Object.values(selectedPhoto.similar_photos);
         }
       }
@@ -65,7 +44,6 @@ const PhotoDetailsModal = ({
           <img src={closeSymbol} alt="Close" />
         </button>
 
-        {/* Main photo with favorite button */}
         <div className="photo-details-modal__main-photo">
           <div className="photo-details-modal__fav-button">
             <PhotoFavButton
@@ -81,7 +59,6 @@ const PhotoDetailsModal = ({
           />
         </div>
 
-        {/* Photographer info */}
         <div className="photo-details-modal__header">
           <div className="photo-details-modal__photographer">
             {photo.user?.profile && (
@@ -110,7 +87,6 @@ const PhotoDetailsModal = ({
           )}
         </div>
 
-        {/* Similar photos section */}
         {similarPhotos.length > 0 && (
           <div className="photo-details-modal__similar">
             <h2 className="photo-details-modal__similar-title">
@@ -150,5 +126,3 @@ const PhotoDetailsModal = ({
 };
 
 export default PhotoDetailsModal;
-
-/* In your getSimilarPhotos function, you're currently importing and using the entire photos array to find similar photos. This might not be efficient if the photos array is large. If possible, consider fetching only the necessary photos based on the topic of the selected photo. This would reduce the amount of data being processed and potentially improve performance. */
