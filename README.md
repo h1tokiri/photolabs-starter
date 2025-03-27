@@ -106,7 +106,7 @@ PhotoLabs is a React-based Single Page Application (SPA) that allows users to ex
 
 ### **Favorite Image**
 
-![Favourite Image](./docs/03-fav-image.png)
+![Favourite Image](./docs/03-fav_image.png)
 
 ---
 
