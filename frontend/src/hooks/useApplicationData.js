@@ -146,7 +146,8 @@ const useApplicationData = () => {
     console.log(`Selected topic: ${topicId}`);
     // If you want to implement topic filtering:
     if (topicId) {
-      fetch(`/api/topics/${topicId}/photos`)
+      // fetch(`/api/topics/${topicId}/photos`)
+      fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
         .then(response => response.json())
         .then(data => {
           dispatch({

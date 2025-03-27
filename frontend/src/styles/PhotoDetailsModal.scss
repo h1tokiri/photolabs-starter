@@ -57,7 +57,7 @@
   }
 
   &__fav-button {
-    position: absolute;
+    position: relative;
     top: 16px;
     left: 16px;
     z-index: 5;
@@ -163,7 +163,7 @@
     }
 
     &-fav-button {
-      position: absolute;
+      position: relative;
       top: 10px;
       left: 10px;
       z-index: 5;
