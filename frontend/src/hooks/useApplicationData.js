@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from "react";
+import { API_URL } from "../config";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -64,8 +65,7 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    console.log("Fetching photos...");
-    fetch("http://localhost:8001/api/photos")
+    fetch(`${API_URL}/photos`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -73,14 +73,12 @@ const useApplicationData = () => {
         return response.json();
       })
       .then(data => {
-        console.log("Photos loaded:", data.length);
         dispatch({
           type: ACTIONS.SET_PHOTO_DATA,
           payload: { photos: data }
         });
       })
       .catch(error => {
-        console.error("Error fetching photos:", error);
         dispatch({
           type: ACTIONS.SET_PHOTO_DATA,
           payload: { photos: [] }
@@ -89,8 +87,7 @@ const useApplicationData = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Fetching topics...");
-    fetch("http://localhost:8001/api/topics")
+    fetch(`${API_URL}/topics`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -98,14 +95,12 @@ const useApplicationData = () => {
         return response.json();
       })
       .then(data => {
-        console.log("Topics loaded:", data.length);
         dispatch({
           type: ACTIONS.SET_TOPIC_DATA,
           payload: { topics: data }
         });
       })
       .catch(error => {
-        console.error("Error fetching topics:", error);
         dispatch({
           type: ACTIONS.SET_TOPIC_DATA,
           payload: { topics: [] }
@@ -143,9 +138,9 @@ const useApplicationData = () => {
   };
 
   const handleSelectTopic = (topicId) => {
-    console.log(`Selected topic: ${topicId}`);
+
     if (topicId) {
-      fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
+      fetch(`${API_URL}/topics/${topicId}/photos`)
         .then(response => response.json())
         .then(data => {
           dispatch({
@@ -153,9 +148,8 @@ const useApplicationData = () => {
             payload: { photos: data }
           });
         })
-        .catch(error => console.error("Error fetching topic photos:", error));
     } else {
-      fetch("/api/photos")
+      fetch(`${API_URL}/photos`)
         .then(response => response.json())
         .then(data => {
           dispatch({
@@ -163,7 +157,6 @@ const useApplicationData = () => {
             payload: { photos: data }
           });
         })
-        .catch(error => console.error("Error fetching all photos:", error));
     }
   };
 
